@@ -140,10 +140,6 @@ public partial class TransitionManager : Node
 			Instance.Connect(SignalName.TransitionProcess, call, (uint)ConnectFlags.OneShot);
 	}
 
-	private float loadTime;
-	/// <summary> After this amount of time, the game will attempt to restart loading. </summary>
-	private readonly float LoadTimeoutLength = 3f;
-
 	private async void ApplySceneChange()
 	{
 		SoundManager.instance.CancelDialog(); // Cancel any active dialog
@@ -157,26 +153,15 @@ public partial class TransitionManager : Node
 			GetTree().UnloadCurrentScene(); // Unload the current scene
 			if (CurrentTransitionData.loadAsynchronously)
 			{
-				loadTime = 0f;
 				ResourceLoader.ThreadLoadStatus status = ResourceLoader.LoadThreadedGetStatus(QueuedScene);
 				while (status != ResourceLoader.ThreadLoadStatus.Loaded)
 				{
 					await ToSignal(GetTree().CreateTimer(.1f), SceneTreeTimer.SignalName.Timeout); // Still loading; wait a bit
 					status = ResourceLoader.LoadThreadedGetStatus(QueuedScene);
-					loadTime += .1f;
-					if (loadTime > LoadTimeoutLength && status != ResourceLoader.ThreadLoadStatus.Loaded)
-					{
-						// Forget async loading
-						GD.Print("Infinite Loading Detected. Force loading.");
-						GetTree().CallDeferred("change_scene_to_file", QueuedScene);
-						CallDeferred(MethodName.FinishSceneChange);
-						return;
-					}
 				}
 
 				PackedScene scene = ResourceLoader.LoadThreadedGet(QueuedScene) as PackedScene;
 				GetTree().ChangeSceneToPacked(scene);
-				GD.Print($"Scene loaded in {loadTime} milliseconds.");
 				FinishSceneChange();
 				return;
 			}
