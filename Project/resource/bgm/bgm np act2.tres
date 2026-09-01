@@ -6,5 +6,4 @@
 script = ExtResource("1_1moum")
 SongName = "Night Palace Act 2"
 StreamPath = "uid://o0t01c63juft"
-LoopStart = 34.24499999999534
-LoopEnd = 248.79000000000815
+LoopEnd = 238.0
