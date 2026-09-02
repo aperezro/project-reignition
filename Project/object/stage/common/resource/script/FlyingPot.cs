@@ -88,15 +88,16 @@ public partial class FlyingPot : Node3D
 			return;
 		}
 
-		if (isSleeping) return;
-
-		if (!Player.IsFlyingPotActive && !lockonArea.Monitorable) // Re-enable lockon
-			lockonArea.SetDeferred("monitorable", Player.VerticalSpeed < 0f);
-
 		if (Player.IsFlyingPotActive)
 			return;
 
-		if (interactingWithPlayer && !Player.IsOnGround && (Player.VerticalSpeed <= 0f || !environmentCollider.Disabled))
+		if (!lockonArea.Monitorable && Player.VerticalSpeed < 0f) // Re-enable lockon
+		{
+			GD.Print("Lockon enabled;");
+			lockonArea.SetDeferred("monitorable", true);
+		}
+
+		if (interactingWithPlayer && !Player.IsOnGround && Player.VerticalSpeed <= 0f)
 			StartJump();
 
 		UpdateAngle(0);
@@ -182,7 +183,7 @@ public partial class FlyingPot : Node3D
 		localPosition.Y = Mathf.Clamp(localPosition.Y, 0f, travelBounds.Y);
 		CheckFloor();
 
-		if (!Mathf.IsZeroApprox(localPosition.Y) && !isOnFloor) // Fall
+		if (!Mathf.IsZeroApprox(localPosition.Y) && !isOnFloor && !isPlayerJumpingIntoPot) // Fall
 		{
 			// Update velocity
 			Velocity -= Runtime.Gravity * PhysicsManager.physicsDelta; // Floaty fall
@@ -224,6 +225,7 @@ public partial class FlyingPot : Node3D
 
 	private void Activate()
 	{
+		GD.Print("Attempting Activation.");
 		isSleeping = false;
 
 		if (isPlayerJumpingIntoPot)
