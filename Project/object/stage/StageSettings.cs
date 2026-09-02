@@ -141,7 +141,7 @@ public partial class StageSettings : Node3D
 
 		string bgmID;
 		currentBGM = null;
-		if (SaveManager.ActiveGameData.selectedMusic.ContainsKey(Data.LevelID))
+		if (SaveManager.ActiveGameData.selectedMusic?.ContainsKey(Data.LevelID) == true)
 		{
 			SaveManager.ActiveGameData.selectedMusic.TryGetValue(Data.LevelID, out bgmID);
 			GD.Print("bgmID: " + bgmID);
