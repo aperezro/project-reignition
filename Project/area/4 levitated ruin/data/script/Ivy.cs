@@ -83,7 +83,6 @@ public partial class Ivy : Launcher
 
 		UpdateSwing();
 		CallDeferred(MethodName.UpdateAreaPosition);
-		ResetPhysicsInterpolation();
 	}
 
 	private void StartIvy()
