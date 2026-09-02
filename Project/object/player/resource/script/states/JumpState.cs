@@ -89,7 +89,7 @@ public partial class JumpState : PlayerState
 			// Check for acceleration jump
 			if (jumpTimer <= AccelerationJumpLength)
 				isAccelerationJumpQueued = true;
-			else
+			else if (Player.IsVariableJumpHeightEnabled)
 				isShortenedJump = true;
 		}
 
