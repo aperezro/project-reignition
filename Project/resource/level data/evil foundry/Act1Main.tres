@@ -2,6 +2,7 @@
 
 [ext_resource type="Resource" uid="uid://bsu0pkrs1lgiq" path="res://resource/level data/evil foundry/Act1Deathless.tres" id="1_3fg3i"]
 [ext_resource type="Script" uid="uid://b8iq60abxjtec" path="res://resource/script/LevelDataResource.cs" id="1_vruol"]
+[ext_resource type="Resource" uid="uid://bvgmr6otpd1o0" path="res://resource/level data/sand oasis/Act1Race.tres" id="2_c4nd0"]
 
 [resource]
 script = ExtResource("1_vruol")
@@ -33,5 +34,5 @@ Mission/Type = 0
 "Completion/Disable Object Cull" = false
 Completion/Delay = 3.0
 Completion/Animation = 1
-"Completion/Unlock Stage" = [ExtResource("1_3fg3i")]
+"Completion/Unlock Stage" = [ExtResource("1_3fg3i"), ExtResource("2_c4nd0")]
 "Completion/Unlock World" = 0
