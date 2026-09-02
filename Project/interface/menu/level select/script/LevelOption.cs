@@ -146,10 +146,7 @@ public partial class LevelOption : Control
 		if (TimeAttackManager.Instance.IsRunActive && TimeAttackManager.Instance.CurrentRunType == TimeAttackManager.RunType.SingleRun)
 		{
 			if (SaveManager.TimeData.HasRank(data))
-			{
-				GD.Print("Has gold for " + data.LevelID);
 				animator.Play(GoldAnimation);
-			}
 		}
 		else
 		{
