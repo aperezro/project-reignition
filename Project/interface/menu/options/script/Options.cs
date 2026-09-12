@@ -69,6 +69,7 @@ public partial class Options : Menu
 	public static readonly string MenuParameter = "menu_texture";
 
 	private Submenus currentSubmenu = Submenus.Options;
+	public bool IsTouchControlTestActive => currentSubmenu == Submenus.Test;
 	private enum Submenus
 	{
 		Options, // Main menu
@@ -233,6 +234,9 @@ public partial class Options : Menu
 				ConfirmGyroOption();
 				break;
 			case Submenus.Mapping:
+				if (!controlMappingOptions[VerticalSelection].IsReady)
+					return;
+
 				ConfirmSFX();
 				controlMappingOptions[VerticalSelection].CallDeferred(ControlOption.MethodName.StartListening);
 				break;
@@ -244,7 +248,7 @@ public partial class Options : Menu
 				}
 
 				int selectedIndex = VerticalSelection - ExtraPartyModeOptionCount;
-				if (!controlMappingOptions[selectedIndex].IsReady)
+				if (!partyMappingOptions[selectedIndex].IsReady)
 					return;
 
 				ConfirmSFX();
@@ -292,6 +296,9 @@ public partial class Options : Menu
 		}
 
 		int selectedIndex = VerticalSelection - ExtraPartyModeOptionCount;
+		if (selectedIndex < 0 || selectedIndex >= partyMappingOptions.Length || !partyMappingOptions[selectedIndex].IsReady)
+			return;
+
 		partyMappingOptions[selectedIndex].ClearMapping();
 	}
 
@@ -321,7 +328,12 @@ public partial class Options : Menu
 				FlipBook(Submenus.Control, true, 4);
 				break;
 			case Submenus.Mapping:
-				if (!controlMappingOptions[VerticalSelection].IsReady) return;
+				if (!controlMappingOptions[VerticalSelection].IsReady)
+				{
+					if (controlMappingOptions[VerticalSelection].CancelListening())
+						CancelSFX();
+					return;
+				}
 
 				CancelSFX();
 				FlipBook(Submenus.Control, true, 5);
@@ -330,6 +342,8 @@ public partial class Options : Menu
 				if (VerticalSelection >= ExtraPartyModeOptionCount &&
 					!partyMappingOptions[VerticalSelection - ExtraPartyModeOptionCount].IsReady)
 				{
+					if (partyMappingOptions[VerticalSelection - ExtraPartyModeOptionCount].CancelListening())
+						CancelSFX();
 					return;
 				}
 
@@ -799,6 +813,11 @@ public partial class Options : Menu
 
 	private bool SlideVideoOption(int direction)
 	{
+		// iOS owns the display and supports spatial scaling rather than FSR2.
+		// SSAO/SSIL require the desktop Forward+ renderer.
+		if (SaveManager.IsMobilePlatform && (VerticalSelection <= 3 || VerticalSelection == 7 || VerticalSelection == 12))
+			return false;
+
 		if (VerticalSelection == 0)
 		{
 			if (DisplayServer.GetScreenCount() <= 1)

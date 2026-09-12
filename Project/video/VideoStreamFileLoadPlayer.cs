@@ -1,4 +1,5 @@
 using Godot;
+using Project.Core;
 
 namespace Project.Interface.Menus;
 
@@ -22,12 +23,19 @@ public partial class VideoStreamFileLoadPlayer : VideoStreamPlayer
 		if (string.IsNullOrEmpty(videoFilePath))
 			return;
 
-		if (!ResourceLoader.Exists(videoFilePath, "VideoStream"))
+		string resolvedPath = ResourceUid.EnsurePath(videoFilePath);
+		string portablePath = resolvedPath.GetBaseName() + ".ogv";
+		// Theora is built into Godot and does not require the desktop FFmpeg extension.
+		string targetPath = SaveManager.IsMobilePlatform ? portablePath : resolvedPath;
+		if (!ResourceLoader.Exists(targetPath, "VideoStream") && ResourceLoader.Exists(portablePath, "VideoStream"))
+			targetPath = portablePath;
+
+		if (!ResourceLoader.Exists(targetPath, "VideoStream"))
 		{
-			GD.PushWarning($"Couldn't load video file {videoFilePath}!");
+			GD.PushWarning($"Couldn't load video file {targetPath}!");
 			return;
 		}
 
-		Stream = ResourceLoader.Load<VideoStream>(videoFilePath, "VideoStream");
+		Stream = ResourceLoader.Load<VideoStream>(targetPath, "VideoStream");
 	}
 }

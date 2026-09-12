@@ -90,9 +90,25 @@ public partial class ControlOption : Control
 
 	public void StartListening()
 	{
+		if (!IsReady)
+			return;
+
 		state = RemapState.Listening;
 		Input.ActionRelease("button_jump");
 		RedrawBinding();
+	}
+
+	/// <summary> Cancels a pending remap without changing its existing bindings. </summary>
+	public bool CancelListening()
+	{
+		if (state != RemapState.Listening)
+			return false;
+
+		// Ignore further input until the cancel press has left this physics frame.
+		state = RemapState.Rebinding;
+		RedrawBinding();
+		StopListening();
+		return true;
 	}
 
 	private async void StopListening()
@@ -117,7 +133,7 @@ public partial class ControlOption : Control
 			if ((e is InputEventKey && (e as InputEventKey).Keycode == Key.Escape) ||
 				InputMap.ActionHasEvent(ActionName, e))
 			{
-				StopListening();
+				CancelListening();
 				return;
 			}
 

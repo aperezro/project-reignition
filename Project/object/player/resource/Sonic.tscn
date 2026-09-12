@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cv14b3r1pov0q" path="res://object/player/resource/BaseModel.tscn" id="1_qi8cv"]
 [ext_resource type="Material" uid="uid://ddgjkiecp1ppu" path="res://object/player/resource/model/material/Sonic Speedbreak Overlay.tres" id="3_djfyb"]
 [ext_resource type="Script" uid="uid://c4giqp0aspcm7" path="res://party/script/character animation/character_blink_animator.gd" id="4_ne6af"]
+[ext_resource type="Script" uid="uid://cmj6nfjjul4bd" path="res://object/player/resource/script/SonicEye.gd" id="5_eye"]
 [ext_resource type="PackedScene" uid="uid://nvbpiay8inap" path="res://area/4 levitated ruin/object/model/special/SonicStone.gltf" id="8_r3bdb"]
 
 [node name="Model" unique_id=1575568576 instance=ExtResource("1_qi8cv")]
@@ -143,7 +144,8 @@ bone_name = &"eyelid_shape"
 
 [node name="LEye" parent="Root/SonicRoot/GeneralSkeleton" index="3" unique_id=1385586187]
 layers = 64
-instance_shader_parameters/uv_offset = Vector2(0.225, 0)
+script = ExtResource("5_eye")
+pupil_uv_offset = Vector2(0.225, 0)
 
 [node name="MouthlessMesh" parent="Root/SonicRoot/GeneralSkeleton" index="4" unique_id=516985810]
 layers = 64
@@ -151,7 +153,8 @@ material_overlay = ExtResource("3_djfyb")
 
 [node name="REye" parent="Root/SonicRoot/GeneralSkeleton" index="5" unique_id=2139863282]
 layers = 64
-instance_shader_parameters/uv_offset = Vector2(-0.225, 0)
+script = ExtResource("5_eye")
+pupil_uv_offset = Vector2(-0.225, 0)
 
 [node name="RingMesh" parent="Root/SonicRoot/GeneralSkeleton" index="6" unique_id=1239807179]
 layers = 64

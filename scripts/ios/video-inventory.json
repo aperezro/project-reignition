@@ -1,0 +1,828 @@
+{
+  "codec": "theora",
+  "quality": 7,
+  "maximum_size": [
+    1280,
+    720
+  ],
+  "maximum_fps": 30,
+  "audio_policy": "Preserve embedded audio as Vorbis; do not add audio to silent videos.",
+  "files": [
+    {
+      "source": "video/boot/logo.mp4",
+      "output": "video/boot/logo.ogv",
+      "source_bytes": 3286294,
+      "output_bytes": 999821,
+      "source_sha256": "f0fa4ddceb212b4a59ab8bd2a85344cd6218b2cfa53a8b36fcc9e723d2f2af6d",
+      "output_sha256": "239e44f9cf33a35d09b29d64c4862df92e809096456c2cebc752fd6c5855ae7f",
+      "duration_seconds": 2.335666,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 1280,
+        "height": 720,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/boot/sff logo.mp4",
+      "output": "video/boot/sff logo.ogv",
+      "source_bytes": 6507278,
+      "output_bytes": 3988325,
+      "source_sha256": "983d01dae2240b38b75cf0f787305671c1aa152c5d213c9579ee1fb861752327",
+      "output_sha256": "c877d59ab95c90366e2016d401a1ea12dcddde2392dc9bcf9a656155562baa3a",
+      "duration_seconds": 2.304,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 1280,
+        "height": 720,
+        "avg_frame_rate": "30000/1001"
+      },
+      "has_embedded_audio": true
+    },
+    {
+      "source": "video/demo/Movie Test 00.mp4",
+      "output": "video/demo/Movie Test 00.ogv",
+      "source_bytes": 15463637,
+      "output_bytes": 1786238,
+      "source_sha256": "722cb504c4a60b48f84af1a066fe3a5092165a629ffbea85c529d74b92d731ec",
+      "output_sha256": "4ea3dabe81cf9e913facf27641a26f41e3b1774f9de4ae796cb61c4930f1c760",
+      "duration_seconds": 19.966667,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 316,
+        "height": 206,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/demo/Movie Test 01.mp4",
+      "output": "video/demo/Movie Test 01.ogv",
+      "source_bytes": 19519926,
+      "output_bytes": 3200125,
+      "source_sha256": "b933ef236e4610d78372478a5f13e5686520b94f85cfd6d1e31511fd997939d7",
+      "output_sha256": "4a0d7e54ddb102199adaaeff1fe6f3753671e39aa18e40601a99b99fc1e6e44a",
+      "duration_seconds": 19.966667,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 318,
+        "height": 224,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/demo/Movie Test 02.mp4",
+      "output": "video/demo/Movie Test 02.ogv",
+      "source_bytes": 15216950,
+      "output_bytes": 1971588,
+      "source_sha256": "719e8bf7ce9ab75b4458c55fd6016afe32df73b1ed91e948bac27fa24ee47d43",
+      "output_sha256": "eb2b28ef27e1004d08b818bc9c423243a08511bf2513f3c9f0158c84cc5760e4",
+      "duration_seconds": 19.966667,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 318,
+        "height": 206,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/demo/Movie Test 03.mp4",
+      "output": "video/demo/Movie Test 03.ogv",
+      "source_bytes": 17945202,
+      "output_bytes": 2169053,
+      "source_sha256": "09245a21eccb1f112a2d6009e4704705fabc4f583800bf23c5362ad261bd0b76",
+      "output_sha256": "ad320c1e5d9587daa930981a292ed7d6cb64f97c5dc0418681fef1cc2bb84273",
+      "duration_seconds": 19.966667,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 316,
+        "height": 206,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/demo/Movie Test 04.mp4",
+      "output": "video/demo/Movie Test 04.ogv",
+      "source_bytes": 15471420,
+      "output_bytes": 1530285,
+      "source_sha256": "6ee2466295a8ba52c25c74f8bc8738f7d288c39de0472fc4198c0f8fc8782c65",
+      "output_sha256": "b990fb75e9bdd48857a50fe16bbdc151e6ee86e0d82d6fbf915c8fef20c6b399",
+      "duration_seconds": 19.966667,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 316,
+        "height": 218,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/demo/Movie Test 05.mp4",
+      "output": "video/demo/Movie Test 05.ogv",
+      "source_bytes": 19609298,
+      "output_bytes": 2873461,
+      "source_sha256": "96c13f700d6be0acefb7443020ff0409cd34df82c9057ffbf6a01a2a88ceea61",
+      "output_sha256": "0b08337d70531f01a2ab1f5475203c17005e5eacfcbef163c795bf0ff9a057b6",
+      "duration_seconds": 19.966667,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 316,
+        "height": 210,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/demo/Movie Test 06.mp4",
+      "output": "video/demo/Movie Test 06.ogv",
+      "source_bytes": 17029666,
+      "output_bytes": 1909014,
+      "source_sha256": "3b000ace9cad3138f260baf6c597c7515cd68945b9cf2b37f49494a2d68edf7c",
+      "output_sha256": "5969f819f6dcf18ad02a82c3ee977885c64b3e2852817e19198fbec0e78871ee",
+      "duration_seconds": 19.966667,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 316,
+        "height": 214,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/demo/Movie Test 07.mp4",
+      "output": "video/demo/Movie Test 07.ogv",
+      "source_bytes": 14314297,
+      "output_bytes": 2198986,
+      "source_sha256": "66a17e1e28fc34264e4763bc221b9a5cdd00bf45a9a1c41119b5979f514f7e57",
+      "output_sha256": "ab5589a82443af2c4b3bcfe3530594115555c1fc93a82dbac932aaaaf86bec86",
+      "duration_seconds": 19.966667,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 316,
+        "height": 220,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0000.mp4",
+      "output": "video/event/stream/E0000.ogv",
+      "source_bytes": 50910456,
+      "output_bytes": 66190860,
+      "source_sha256": "4ffd1264105047d1f7c7c1e15b09ccb75dad97ab37982a921332793bf377514b",
+      "output_sha256": "36971d3592bfd712661e2b2715b865d7796618b9daf8d156be56934068b779fc",
+      "duration_seconds": 137.370567,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 1280,
+        "height": 720,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0001.mp4",
+      "output": "video/event/stream/E0001.ogv",
+      "source_bytes": 9882825,
+      "output_bytes": 18173929,
+      "source_sha256": "ccc4ddb55a83ea2e6e556a163be88025d9218b068bc6e607bff9e7851a83b298",
+      "output_sha256": "7bb65006f7d817d44b00bbf4ca8100d5ed3dae3212ee3a56e8c034bb0afb787a",
+      "duration_seconds": 262.295367,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0002.mp4",
+      "output": "video/event/stream/E0002.ogv",
+      "source_bytes": 7296751,
+      "output_bytes": 15436924,
+      "source_sha256": "106302fc234c08d6255a477354f93c7d683b0e25b1f7c4554b914ee042b63d5d",
+      "output_sha256": "d5643a8a33c1e4ecf6614d8e6792e45369e8fd82cf97484a86e8803a88d0af1c",
+      "duration_seconds": 165.233333,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 480,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0003.mp4",
+      "output": "video/event/stream/E0003.ogv",
+      "source_bytes": 2322601,
+      "output_bytes": 4768925,
+      "source_sha256": "9f3224c68616b157549c8f5ccab8095ad396b086f168c61b5e5650d0e6a8f21f",
+      "output_sha256": "81fc44890054d39208898ba2428f09f0161af067377e1fa2cfa671a83238d3d3",
+      "duration_seconds": 65.231833,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0004.mp4",
+      "output": "video/event/stream/E0004.ogv",
+      "source_bytes": 2165064,
+      "output_bytes": 3709423,
+      "source_sha256": "3403cdf1e77d2d025c9e1430f6b645e74a1ee5a397be2a8655d8988a2ecc1e9c",
+      "output_sha256": "6ef1a20ced9c14b1e8f4f4218abeab0767bc0416b156aed26126d46ae94df4e6",
+      "duration_seconds": 44.577867,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0005.mp4",
+      "output": "video/event/stream/E0005.ogv",
+      "source_bytes": 2266403,
+      "output_bytes": 4152505,
+      "source_sha256": "838ad814c2e2e7985b19b1f47762337934888dfd4235722696d71383aba529b8",
+      "output_sha256": "9201051168576a872333c1307fb5f3623f4034c416c02dfad59f5d943f5fd13b",
+      "duration_seconds": 52.052,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0006.mp4",
+      "output": "video/event/stream/E0006.ogv",
+      "source_bytes": 2737577,
+      "output_bytes": 5988617,
+      "source_sha256": "ec9f5b760ba3d28878dd4c0bf7e8974d6845c97a5807274facbf282226ac6718",
+      "output_sha256": "35d960235632b6f0515c7d417ca5fe41419a2a7266be2effb8f48f1982981044",
+      "duration_seconds": 90.123367,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0007.mp4",
+      "output": "video/event/stream/E0007.ogv",
+      "source_bytes": 2068323,
+      "output_bytes": 3139899,
+      "source_sha256": "fcde4228aeabde9646797481bca9274848591699f2f760c1c08766cdc237c284",
+      "output_sha256": "f686aa7971e925b04bfce4662386e60340eaa9affbf85dddb41c114b6da86cbb",
+      "duration_seconds": 47.280567,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0008.mp4",
+      "output": "video/event/stream/E0008.ogv",
+      "source_bytes": 2867476,
+      "output_bytes": 5008828,
+      "source_sha256": "98b3ee8bdb4025aeb840ee72a0c61b883e3f913ace456b43b0f475099482f068",
+      "output_sha256": "382ca9d852f1dfe7ba69851924cdf7f6a55d4b35ae727420d14d09d09417f951",
+      "duration_seconds": 60.093367,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0009.mp4",
+      "output": "video/event/stream/E0009.ogv",
+      "source_bytes": 7457621,
+      "output_bytes": 10165914,
+      "source_sha256": "26c2f950413b45adebf8685fc30d509f76af7feb05961308d2a39d34dbe05227",
+      "output_sha256": "28cbbd0fefb6f6879db06c2b38d8609b8e900e543cef01e8a53af48166d57ac6",
+      "duration_seconds": 124.157367,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0010.mp4",
+      "output": "video/event/stream/E0010.ogv",
+      "source_bytes": 2358775,
+      "output_bytes": 4339362,
+      "source_sha256": "53cc662406c57b1127cae9243d735b0d49c69f187f25a4c7e7b312f8ece8cf6a",
+      "output_sha256": "7901511f4a6184ffa2a2681a4001ae103729bbfce26e0812e01f590037c027cf",
+      "duration_seconds": 58.8588,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 480,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0011.mp4",
+      "output": "video/event/stream/E0011.ogv",
+      "source_bytes": 2947676,
+      "output_bytes": 5890826,
+      "source_sha256": "633cc20709c41473d071e619004130a24e1fc0c079beeb49c8fcefb1d36109e8",
+      "output_sha256": "562dfaa530cb4758ae9fef1019b3d247aabc6edf0cc96f9bebea95b2ccb6a0e9",
+      "duration_seconds": 74.107367,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 480,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0012.mp4",
+      "output": "video/event/stream/E0012.ogv",
+      "source_bytes": 2920299,
+      "output_bytes": 3852422,
+      "source_sha256": "6cf2126a67ab68c0abfdfc6ab2ee2451c67502c436fc196fa4f778ac5b599a8f",
+      "output_sha256": "61cacc01a24793c5d8cdc3585f49d161d947f75cceb3e3f15b81a823ff393b39",
+      "duration_seconds": 44.377667,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0013.mp4",
+      "output": "video/event/stream/E0013.ogv",
+      "source_bytes": 3051365,
+      "output_bytes": 4274478,
+      "source_sha256": "39d70679a47ef0b9bf3394a0459e3143cbd2dff419318f1d995ed41aba0c6f42",
+      "output_sha256": "5e8aedf2e2e18b924dfeab40f69707fef5954b0dafc5f21e02ddcf881ae99ed3",
+      "duration_seconds": 60.093367,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0014.mp4",
+      "output": "video/event/stream/E0014.ogv",
+      "source_bytes": 4383312,
+      "output_bytes": 3401779,
+      "source_sha256": "5f516ff05b87202e1f67ccb4b7384846621768986f220759b7db94fc399e4972",
+      "output_sha256": "2040258f6c8b2077679c63c962255364328d7d3d760298bbbc9c49d66fd9fbef",
+      "duration_seconds": 16.449767,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0015.mp4",
+      "output": "video/event/stream/E0015.ogv",
+      "source_bytes": 7859748,
+      "output_bytes": 6639330,
+      "source_sha256": "a076988908ca6a1b0d6a7cb659ab09d8bb7822cc0c383383e6c49819aba078f2",
+      "output_sha256": "721550484eeb46dec3b8a081ac2db6d3c7680a9d755c4a09ca1b0f146c815851",
+      "duration_seconds": 27.9279,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0016.mp4",
+      "output": "video/event/stream/E0016.ogv",
+      "source_bytes": 5602703,
+      "output_bytes": 5894651,
+      "source_sha256": "713755eca457f44d774e082d8d0ad9d649fb45485c935ca8aa96d47c4cf1f312",
+      "output_sha256": "f0cf92cb77d8e0a99d8f186b93a3e2ac85a9c60c43d7579454d13b9ba312eb56",
+      "duration_seconds": 50.083367,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0017.mp4",
+      "output": "video/event/stream/E0017.ogv",
+      "source_bytes": 4095283,
+      "output_bytes": 4693777,
+      "source_sha256": "ab0d451e759570ba837a442a9b9728d9d1d9920df3402048e144efdfce075b25",
+      "output_sha256": "7cb1b5e1b2dfb5cccd285f4c769f294ed24538785b3426a520474767efebb83e",
+      "duration_seconds": 38.071367,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0018.mp4",
+      "output": "video/event/stream/E0018.ogv",
+      "source_bytes": 3426423,
+      "output_bytes": 3912631,
+      "source_sha256": "edb9cf9c78c5d2fe5a29dc1e510fe44123071e7dc28212848239dadb05139458",
+      "output_sha256": "7b356af3e8e83defeab5358312b9c1705ea80c95e1a6f00f895b486260192dca",
+      "duration_seconds": 41.5415,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0019.mp4",
+      "output": "video/event/stream/E0019.ogv",
+      "source_bytes": 3157339,
+      "output_bytes": 4219378,
+      "source_sha256": "1a41ef083b32cfc7723f51c43f26f29d5f0fbf956866fa94365dba1b43885483",
+      "output_sha256": "8a6f4b5b602dd10c983846c849f94dfee5cbcf0b7ce0d32bc7d5aa7d724b9d11",
+      "duration_seconds": 50.5505,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0020.mp4",
+      "output": "video/event/stream/E0020.ogv",
+      "source_bytes": 1895531,
+      "output_bytes": 3609810,
+      "source_sha256": "fcc8a36fb59073f2d88f3178035193bd3eb64bf026201a78552b83c57872c271",
+      "output_sha256": "b0a959b0e69dd5aaf34d02a56b184a5d59a4c44130eebc5d9c0365b2061beb55",
+      "duration_seconds": 49.983267,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0021.mp4",
+      "output": "video/event/stream/E0021.ogv",
+      "source_bytes": 2643921,
+      "output_bytes": 4118913,
+      "source_sha256": "43d74d242d1164f38e3bcca4bbc4b5c97e9a319385162bc9428e26877a088239",
+      "output_sha256": "44221fc9c72179e5b9a9072d283140aff063b6b700da93aa131a972c4e81c68e",
+      "duration_seconds": 50.083367,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 480,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0022.mp4",
+      "output": "video/event/stream/E0022.ogv",
+      "source_bytes": 5171598,
+      "output_bytes": 9776995,
+      "source_sha256": "ae72a979902b877fbdeef6fcf0a2b48179815939b203b1e5ed5d82872418a5b5",
+      "output_sha256": "2f8dde1c2296ae5f60ea4149fea868e0188116732e9f65905133fa084f0f4293",
+      "duration_seconds": 139.806333,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0023.mp4",
+      "output": "video/event/stream/E0023.ogv",
+      "source_bytes": 2197805,
+      "output_bytes": 3497844,
+      "source_sha256": "1234dd9e9ac1382d6ee7aad6a9b75aac67ab63615467374d49ac3252a7a98f03",
+      "output_sha256": "2c9271977e4c4ef842815373d4bdf2f2fd9e2125a6a7c6dc0468b7dc5974f9e1",
+      "duration_seconds": 46.9469,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0024.mp4",
+      "output": "video/event/stream/E0024.ogv",
+      "source_bytes": 5742508,
+      "output_bytes": 8247015,
+      "source_sha256": "98a0b9838efa9caef9a874536437564b41d31e580b774c190e230e67dc853c69",
+      "output_sha256": "57637049be0c37bff154ad6604957bd52950ec22d959340065fcc1f031d492a6",
+      "duration_seconds": 103.136367,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0025.mp4",
+      "output": "video/event/stream/E0025.ogv",
+      "source_bytes": 1710683,
+      "output_bytes": 2576865,
+      "source_sha256": "b13562812d181920b913c5c4249cea26dbb95479f615da08bd21d3d358f57184",
+      "output_sha256": "eb48c6555884ae705de9feee25f66015f9631338ce00ea4f31f937c781aade10",
+      "duration_seconds": 31.898533,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0026.mp4",
+      "output": "video/event/stream/E0026.ogv",
+      "source_bytes": 3343983,
+      "output_bytes": 4921325,
+      "source_sha256": "f7c98ea44334606514538ed58bf4ca183db09bbbe6aacc49abf1d727e3f18238",
+      "output_sha256": "bd994e8e2b693ef85aaae750c965957622a7f8363948476dac3d14088d7e1f8f",
+      "duration_seconds": 61.995267,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0027.mp4",
+      "output": "video/event/stream/E0027.ogv",
+      "source_bytes": 18568047,
+      "output_bytes": 23414911,
+      "source_sha256": "cd0e61a3ac868764658ef10332448524e29f2bf92e856ab02882e914fc9b2773",
+      "output_sha256": "37ad24aaeb96afb73300097f0fe20238126febd6f20b5600a0d4c010c605ce8a",
+      "duration_seconds": 265.3651,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 478,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0028.mp4",
+      "output": "video/event/stream/E0028.ogv",
+      "source_bytes": 53710345,
+      "output_bytes": 53266645,
+      "source_sha256": "5fe52f62b6cfc9f391134597c1707161be37cea8e6ba15b7fdb09ff4e393e46e",
+      "output_sha256": "4506c5315e2c21f9f05c8277df91e5922b8ac1dad326134e8591651e8123e287",
+      "duration_seconds": 181.233333,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 452,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0029.mp4",
+      "output": "video/event/stream/E0029.ogv",
+      "source_bytes": 1586627,
+      "output_bytes": 1576342,
+      "source_sha256": "146d6a928319324b53afe35147a11c9636f539e3bafeabbd63d2913d535c49ae",
+      "output_sha256": "96b1f61d3b5405f74daf8b998b9d30d19fd16e90aba6efaa2be4a4aa1b10b443",
+      "duration_seconds": 26.059367,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 634,
+        "height": 426,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/E0030.mp4",
+      "output": "video/event/stream/E0030.ogv",
+      "source_bytes": 1933108,
+      "output_bytes": 2171771,
+      "source_sha256": "014f405b61429a7bbfadd3d141cb6fcedd49eb26ffd736eae1942df11be1c7f7",
+      "output_sha256": "a595062a7f50cbece6f925e48f4640ad0501887d23c041d663a0a834dda97756",
+      "duration_seconds": 11.011,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 480,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/Ed 1.mp4",
+      "output": "video/event/stream/Ed 1.ogv",
+      "source_bytes": 1479267,
+      "output_bytes": 2614692,
+      "source_sha256": "96a9b8a8a307e1cb5fd7f222834910e05e38ee637248cc93fc8dbf205e2d1f4d",
+      "output_sha256": "942fffe0b93e8bc84c75a5a564f464ea778eb4c407650331de725cc02e0d3c16",
+      "duration_seconds": 43.9439,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 480,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/Ed 2.mp4",
+      "output": "video/event/stream/Ed 2.ogv",
+      "source_bytes": 7203177,
+      "output_bytes": 7482313,
+      "source_sha256": "190e52e953d299dbb9fa365fc7fa2a33f3b6c55e9a84454db15e4d5a1299f25c",
+      "output_sha256": "5c91d29351bd71d719ce1f1d05d309048bdf4ac3b065b32c62b428eb523beb87",
+      "duration_seconds": 32.866167,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 480,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/Ed 3.mp4",
+      "output": "video/event/stream/Ed 3.ogv",
+      "source_bytes": 7363794,
+      "output_bytes": 7389178,
+      "source_sha256": "270f2eabfcdbf9e8f38147a2ca592dc22e49ad0e8f5ba43bcc9b2b2393b6804d",
+      "output_sha256": "f7e600a5e9e8372db97fc788f4a230bf2cf23bfefb687b960410c65f9cd1d9ee",
+      "duration_seconds": 40.874167,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 480,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/Kaihatsufukei.mp4",
+      "output": "video/event/stream/Kaihatsufukei.ogv",
+      "source_bytes": 42510654,
+      "output_bytes": 45947396,
+      "source_sha256": "8c5062a156971eb35c8717b03cba61dd4f13604be0edd944fc015584d23a5d52",
+      "output_sha256": "69cc15a2921e1f9f5ba040386de7195fce2c03a041ff471131fa38bd51e53af1",
+      "duration_seconds": 173.806967,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 480,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/Op 1.mp4",
+      "output": "video/event/stream/Op 1.ogv",
+      "source_bytes": 10789127,
+      "output_bytes": 18242175,
+      "source_sha256": "b9b41deda4a078be898d617ecc9156b43a4cbdc05ae65ff71c9d4f54a563bafd",
+      "output_sha256": "ce64725dc7051ec6503a6f6d8ac4b5a52196f7b38d9457361a2aaafe598694fe",
+      "duration_seconds": 73.1731,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 480,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/Op 2.mp4",
+      "output": "video/event/stream/Op 2.ogv",
+      "source_bytes": 12616316,
+      "output_bytes": 15142150,
+      "source_sha256": "96d29294443177229e4f3a2f3205595ec1a591f9f3ce15293f580b8b559e695c",
+      "output_sha256": "ac36bb6f34ff92509ff6b963cca1f3f9cae9efcdbb86814084875882f0973144",
+      "duration_seconds": 80.113367,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 480,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    },
+    {
+      "source": "video/event/stream/Op 3.mp4",
+      "output": "video/event/stream/Op 3.ogv",
+      "source_bytes": 20365152,
+      "output_bytes": 20113453,
+      "source_sha256": "f708d45089296faa66dce72c274e7ab9c650a21ef94b0d6408ae95296335a07e",
+      "output_sha256": "2308d5ffb20f2e99f8453cbe1df9ff6c89dcc769f3c7cb8f0013d1532b4d899d",
+      "duration_seconds": 86.7867,
+      "video": {
+        "codec_name": "theora",
+        "codec_type": "video",
+        "width": 640,
+        "height": 480,
+        "avg_frame_rate": "0/0"
+      },
+      "has_embedded_audio": false
+    }
+  ]
+}

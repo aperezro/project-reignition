@@ -7,6 +7,7 @@ uniform float intensity = 1.0;
 uniform float hue_shift : hint_range(0.0, 1.0, 0.01) = 0.0;
 uniform vec2 scroll_speed;
 uniform float opacity = 1.0;
+uniform float effect_alpha : hint_range(0.0, 1.0) = 1.0;
 uniform float softness : hint_range(0.0, 5.0, 0.1) = 1.0;
 uniform sampler2D albedo : hint_default_white, repeat_enable;
 uniform sampler2D lut : repeat_enable;
@@ -48,5 +49,5 @@ void fragment()
 	if(softness > .01)
 		ALPHA *= pow(dot(NORMAL, VIEW), softness);
 
-	ALPHA = clamp(ALPHA, 0.0, 1.0);
+	ALPHA = clamp(ALPHA, 0.0, 1.0) * effect_alpha;
 }

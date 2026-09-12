@@ -1,10 +1,22 @@
 # Godot 4+ specific ignores
 .godot/
 
+# Local iOS toolchain and generated builds/signing artifacts
+.tools/
+build/
+Project-Reignition/
+*.ipa
+*.xcarchive/
+*.mobileprovision
+scripts/ios/godot-cli-fix/bin/
+scripts/ios/godot-cli-fix/obj/
+__pycache__/
+
 # Godot-specific ignores
 .import/
 export.cfg
 export_presets.cfg
+!Project/export_presets.cfg
 
 # Imported translations (automatically generated from CSV files)
 *.translation
@@ -25,6 +37,9 @@ mono_crash.*.json
 # Video files are too large to backup
 *.ogv
 *.mp4
+*.ogv.uid
+*.sln.uid
+Project/addons/ffmpeg/LICENSE-ffmpeg.txt.uid
 
 # Ignore FFMPEG .dll
 Project/addons/ffmpeg/win64/~libgdffmpeg.windows.template_debug.x86_64.dll

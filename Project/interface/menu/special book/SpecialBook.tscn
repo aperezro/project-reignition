@@ -1286,16 +1286,13 @@ _data = {
 &"show": SubResource("Animation_mfyml")
 }
 
-[node name="SpecialBook" type="AspectRatioContainer" unique_id=1810213473]
+[node name="SpecialBook" type="Control" unique_id=1810213473]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-ratio = 1.7778
-stretch_mode = 1
-alignment_horizontal = 0
 script = ExtResource("1_wuupq")
 
 [node name="Book" type="Control" parent="." unique_id=355451719 node_paths=PackedStringArray("SpecialBookTabParent", "tabs", "windows", "thumbnails", "chapterName", "chapterLabel", "textboxTitle", "previewDescription", "previewNumber", "previewTextureRect", "fullTextureRect", "navigationAnimator", "audioPlayer", "sfxOpen", "sfxSelect", "sfxCancel", "sfxConfirm", "sfxCategorySelect", "bgm", "animator")]

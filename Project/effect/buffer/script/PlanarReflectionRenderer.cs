@@ -93,7 +93,7 @@ public partial class PlanarReflectionRenderer : Node3D
 	// Mirror main camera along plane
 	private void UpdatePosition()
 	{
-		if (disableRenderering)
+		if (disableRenderering || SaveManager.Config.reflectionQuality == SaveManager.QualitySetting.Disabled || GameplayCamera == null)
 			return;
 
 		reflectionCamera.CullMask = GameplayCamera.CullMask;
@@ -119,7 +119,14 @@ public partial class PlanarReflectionRenderer : Node3D
 		Vector3 forwardDirection = gameplayTransform.Basis.Z.Reflect(reflectionAxis.Normalized());
 		reflectionCamera.LookAtFromPosition(targetPosition, targetPosition + forwardDirection, upDirection);
 
-		reflectionViewport.Size = Engine.IsEditorHint() ? (Vector2I)GameplayCamera.GetViewport().GetVisibleRect().Size : Runtime.HalfScreenSize;
+		Vector2I targetSize = Engine.IsEditorHint() ? (Vector2I)GameplayCamera.GetViewport().GetVisibleRect().Size : Runtime.HalfScreenSize;
+		if (SaveManager.IsMobilePlatform)
+		{
+			// Match the expanded gameplay aspect so reflections do not stretch on iPads.
+			targetSize = (Vector2I)GameplayCamera.GetViewport().GetVisibleRect().Size;
+			targetSize /= SaveManager.Config.reflectionQuality == SaveManager.QualitySetting.Low ? 4 : 2;
+		}
+		reflectionViewport.Size = targetSize;
 		reflectionViewport.RenderTargetUpdateMode = SubViewport.UpdateMode.Once;
 	}
 
@@ -175,6 +182,12 @@ public partial class PlanarReflectionRenderer : Node3D
 	}
 	public void EnableRendering()
 	{
+		if (SaveManager.Config.reflectionQuality == SaveManager.QualitySetting.Disabled)
+		{
+			DisableRendering();
+			return;
+		}
+
 		reflectionCamera.MakeCurrent();
 		reflectionCamera.ProcessMode = ProcessModeEnum.Inherit;
 		disableRenderering = false;

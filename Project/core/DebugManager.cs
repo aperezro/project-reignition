@@ -47,7 +47,7 @@ public partial class DebugManager : Control
 
 	public override void _PhysicsProcess(double _)
 	{
-		if (Input.IsActionJustPressed("toggle_fullscreen")) // Global shortcut used in final build as well
+		if (!SaveManager.IsMobilePlatform && Input.IsActionJustPressed("toggle_fullscreen")) // Global shortcut used in final build as well
 		{
 			SaveManager.Config.useFullscreen = !SaveManager.Config.useFullscreen;
 			SaveManager.ApplyConfig();

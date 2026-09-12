@@ -426,17 +426,15 @@ subtitleAnimator = NodePath("SubtitleLetterbox/SubtitleAnimationPlayer")
 subtitleLabel = NodePath("SubtitleLetterbox/Subtitles")
 subtitleRoot = NodePath("SubtitleLetterbox")
 
-[node name="Menu" type="AspectRatioContainer" parent="." unique_id=1188841209]
+[node name="Menu" type="Control" parent="." unique_id=1188841209]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-ratio = 1.7777
-stretch_mode = 1
-alignment_horizontal = 0
 script = ExtResource("6_u8y74")
+FitMenuContent = false
 
 [node name="Clip" type="ColorRect" parent="Menu" unique_id=1439230853]
 clip_children = 2

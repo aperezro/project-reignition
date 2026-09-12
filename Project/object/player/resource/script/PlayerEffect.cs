@@ -15,6 +15,7 @@ public partial class PlayerEffect : Node3D
 	{
 		Player = player;
 		trailFX.Player = Player;
+		CanelSpinFX();
 
 		// Rebuild dialog libraries to account for modded locales
 		voiceLibrary?.LocalizeAudioStreams(true);
@@ -151,9 +152,33 @@ public partial class PlayerEffect : Node3D
 			darkspineTrailFx.Emitting = false;
 	}
 
-	public void StartSpinFX() => CreateTween().TweenProperty(spinFX, "transparency", 0.0f, .1f);
-	public void StopSpinFX() => CreateTween().TweenProperty(spinFX, "transparency", 1.0f, .1f);
-	public void CanelSpinFX() => spinFX.Transparency = 1f;
+	private Tween spinFade;
+	private ShaderMaterial SpinMaterial => (ShaderMaterial)spinFX.MaterialOverride;
+	private const string SpinAlpha = "shader_parameter/effect_alpha";
+
+	public void StartSpinFX()
+	{
+		spinFade?.Kill();
+		spinFX.Show();
+		spinFade = CreateTween();
+		// GeometryInstance3D.Transparency is ignored by the Mobile renderer.
+		spinFade.TweenProperty(SpinMaterial, SpinAlpha, 1.0f, .1f);
+	}
+
+	public void StopSpinFX()
+	{
+		spinFade?.Kill();
+		spinFade = CreateTween();
+		spinFade.TweenProperty(SpinMaterial, SpinAlpha, 0.0f, .1f);
+		spinFade.TweenCallback(Callable.From(spinFX.Hide));
+	}
+
+	public void CanelSpinFX()
+	{
+		spinFade?.Kill();
+		SpinMaterial.SetShaderParameter("effect_alpha", 0.0f);
+		spinFX.Hide();
+	}
 
 	[Export] private AnimationPlayer spinFXAnimator;
 	public void StartSpinSquashFX()

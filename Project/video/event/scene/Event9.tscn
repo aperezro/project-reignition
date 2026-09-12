@@ -882,7 +882,7 @@ localizationKeyPrefix = "event09_"
 animator = NodePath("AnimationPlayer")
 
 [node name="Video" parent="Resizer" parent_id_path=PackedInt32Array(904036434) index="0" unique_id=1245818762]
-videoFilePath = "uid://m05m2thcbuji"
+videoFilePath = "res://video/event/stream/E0009.mp4"
 
 [node name="Subtitles" parent="SubtitleLetterbox" parent_id_path=PackedInt32Array(1788931667) index="0" unique_id=161850091]
 text = "event09_30"

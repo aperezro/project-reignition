@@ -33,17 +33,60 @@ public partial class MultiplicativeBloomRenderer : Node
 	private Camera3D    _attachedCamera;
 	private StandardMaterial3D _occluderMaterial;
 	private readonly List<MeshInstance3D> _bloomMeshes = new();
+	private ShaderMaterial _mobileComposite;
+	private readonly List<ShaderMaterial> _mobileBloomBlur = new();
+	private readonly List<ShaderMaterial> _mobileMaskBlur = new();
+
+	private const string MobileBlurShader = """
+		shader_type canvas_item;
+		render_mode unshaded, blend_disabled;
+		uniform sampler2D source_tex : filter_linear, repeat_disable;
+		uniform vec2 texel_size;
+		uniform vec2 direction;
+		uniform float strength = 1.0;
+		void fragment() {
+			vec2 offset = texel_size * strength * direction;
+			COLOR = texture(source_tex, UV) * 0.3125;
+			COLOR += (texture(source_tex, UV - offset) + texture(source_tex, UV + offset)) * 0.234375;
+			COLOR += (texture(source_tex, UV - offset * 2.0) + texture(source_tex, UV + offset * 2.0)) * 0.09375;
+			COLOR += (texture(source_tex, UV - offset * 3.0) + texture(source_tex, UV + offset * 3.0)) * 0.015625;
+		}
+		""";
+	private const string MobileCompositeShader = """
+		shader_type canvas_item;
+		render_mode unshaded, blend_mul;
+		uniform sampler2D bloom_tex : filter_linear, repeat_disable;
+		uniform sampler2D mask_tex : filter_linear, repeat_disable;
+		uniform float effect_threshold;
+		uniform float foreground_threshold;
+		uniform float foreground_edge_start;
+		void fragment() {
+			float foreground = texture(mask_tex, UV).a;
+			float amount = 1.0 - smoothstep(foreground_edge_start, foreground_threshold, foreground);
+			vec3 bloom = texture(bloom_tex, UV).rgb;
+			if (1.0 - dot(bloom, vec3(0.333)) < effect_threshold) amount = 0.0;
+			COLOR = vec4(mix(vec3(1.0), bloom, amount), 1.0);
+		}
+		""";
 
 	public override void _Ready()
 	{
-		var script = ResourceLoader.Load<GDScript>(compositorScriptPath);
-		if (script == null)
+		if (RenderingServer.GetCurrentRenderingMethod() == "mobile")
 		{
-			GD.PrintErr("MultiplicativeBloomRenderer: failed to load ", compositorScriptPath);
-			return;
+			// Mobile's scene-color attachment is not a storage image. Use the same
+			// separable blur and multiply blend through small raster viewports instead.
+			SetupMobileComposite();
 		}
-
-		_compositorEffect = (GodotObject)script.New();
+		else
+		{
+			var script = ResourceLoader.Load<GDScript>(compositorScriptPath);
+			if (script == null)
+			{
+				GD.PrintErr("MultiplicativeBloomRenderer: failed to load ", compositorScriptPath);
+				return;
+			}
+			_compositorEffect = (GodotObject)script.New();
+		}
 
 		SetupBloomViewport();
 		SetupForegroundMaskViewport();
@@ -55,6 +98,47 @@ public partial class MultiplicativeBloomRenderer : Node
 
 		CallDeferred(MethodName.CacheBloomMeshes);
 		CallDeferred(MethodName.SetupOccluders);
+	}
+
+	private void SetupMobileComposite()
+	{
+		if (bloomViewport == null || foregroundMaskViewport == null)
+			return;
+
+		Shader blurShader = new() { Code = MobileBlurShader };
+		Texture2D bloom = CreateMobileBlur(bloomViewport.GetTexture(), bloomViewport.Size, blurShader, _mobileBloomBlur);
+		Texture2D mask = CreateMobileBlur(foregroundMaskViewport.GetTexture(), foregroundMaskViewport.Size, blurShader, _mobileMaskBlur);
+		_mobileComposite = new ShaderMaterial { Shader = new Shader { Code = MobileCompositeShader } };
+		_mobileComposite.SetShaderParameter("bloom_tex", bloom);
+		_mobileComposite.SetShaderParameter("mask_tex", mask);
+		CanvasLayer layer = new() { Name = "MobileBloomComposite", Layer = -1 };
+		AddChild(layer);
+		ColorRect quad = new() { Color = Colors.White, Material = _mobileComposite, MouseFilter = Control.MouseFilterEnum.Ignore };
+		layer.AddChild(quad);
+		quad.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.FullRect);
+	}
+
+	private Texture2D CreateMobileBlur(Texture2D source, Vector2I size, Shader shader, List<ShaderMaterial> materials)
+	{
+		for (int pass = 0; pass < 2; pass++)
+		{
+			SubViewport viewport = new()
+			{
+				Size = size,
+				Disable3D = true,
+				TransparentBg = true,
+				RenderTargetUpdateMode = SubViewport.UpdateMode.Always,
+			};
+			ShaderMaterial material = new() { Shader = shader };
+			material.SetShaderParameter("source_tex", source);
+			material.SetShaderParameter("texel_size", new Vector2(1f / size.X, 1f / size.Y));
+			material.SetShaderParameter("direction", pass == 0 ? Vector2.Right : Vector2.Down);
+			materials.Add(material);
+			viewport.AddChild(new ColorRect { Size = size, Color = Colors.White, Material = material, MouseFilter = Control.MouseFilterEnum.Ignore });
+			AddChild(viewport);
+			source = viewport.GetTexture();
+		}
+		return source;
 	}
 
 	private void SetupBloomViewport()
@@ -171,13 +255,25 @@ public partial class MultiplicativeBloomRenderer : Node
 
 	public override void _Process(double delta)
 	{
-		if (_compositorEffect == null) return;
+		if (_compositorEffect == null && _mobileComposite == null) return;
 
 		var camera = GetViewport().GetCamera3D();
 		if (camera == null) return;
 
-		EnsureCompositorAttached(camera);
 		SyncCameras(camera);
+		if (_mobileComposite != null)
+		{
+			foreach (ShaderMaterial material in _mobileBloomBlur)
+				material.SetShaderParameter("strength", strength);
+			foreach (ShaderMaterial material in _mobileMaskBlur)
+				material.SetShaderParameter("strength", maskBlurStrength);
+			_mobileComposite.SetShaderParameter("effect_threshold", effectThreshold);
+			_mobileComposite.SetShaderParameter("foreground_threshold", foregroundThreshold);
+			_mobileComposite.SetShaderParameter("foreground_edge_start", foregroundEdgeStart);
+			return;
+		}
+
+		EnsureCompositorAttached(camera);
 
 		_compositorEffect.Set("strength",              strength);
 		_compositorEffect.Set("mask_blur_strength",    maskBlurStrength);

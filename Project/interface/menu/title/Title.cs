@@ -43,7 +43,11 @@ namespace Project.Interface.Menus
 				return;
 			}
 
-			if (Input.IsAnythingPressed()) // Change menu
+			// A complete tap can arrive between physics frames. Its press edge remains
+			// available even though nothing is still held when this menu processes.
+			if (Input.IsAnythingPressed() || Input.IsActionJustPressed("sys_select") ||
+				Input.IsActionJustPressed("sys_pause") || Input.IsActionJustPressed("ui_accept") ||
+				Input.IsActionJustPressed("ui_select")) // Change menu
 			{
 				Runtime.Instance.IsUsingMouse = Input.IsActionJustPressed("mouse_left");
 				Confirm();

@@ -9,6 +9,9 @@ namespace Project.Core;
 public partial class SaveManager : Node
 {
 	public static SaveManager Instance;
+	/// <summary> Mobile apps use an OS-managed window and a sandboxed data directory. </summary>
+	public static bool IsMobilePlatform { get; } = OS.HasFeature("ios") || OS.HasFeature("android") ||
+		System.Array.IndexOf(OS.GetCmdlineUserArgs(), "--ios-smoke-test") >= 0;
 
 	[Signal] public delegate void ConfigAppliedEventHandler();
 	/// <summary> The first level loaded when a new game is started. </summary>
@@ -66,6 +69,14 @@ public partial class SaveManager : Node
 
 	private string GetDataDirectory()
 	{
+		// Smoke tests must never read or write the player's normal configuration or saves.
+		if (System.Array.IndexOf(OS.GetCmdlineUserArgs(), "--ios-smoke-test") >= 0)
+			return "user://ios-smoke-test/";
+
+		// An iOS application bundle is read-only, and its container path can change after an update.
+		if (IsMobilePlatform)
+			return "user://";
+
 		FileAccess f = FileAccess.Open(SaveLocationFile, FileAccess.ModeFlags.Read);
 		if (f != null && f.GetError() == Error.Ok)
 		{
@@ -227,18 +238,18 @@ public partial class SaveManager : Node
 		public bool useFullscreen = true;
 		public bool useExclusiveFullscreen;
 		public int framerate = 3;
-		public bool useVsync;
-		public int renderScale = 100;
+		public bool useVsync = IsMobilePlatform;
+		public int renderScale = IsMobilePlatform ? 75 : 100;
 		public RenderingServer.ViewportScaling3DMode resizeMode = RenderingServer.ViewportScaling3DMode.Bilinear;
 		public int antiAliasing = 1; // Default to FXAA
-		public QualitySetting bloomMode = QualitySetting.High;
-		public bool useMotionBlur = true;
+		public QualitySetting bloomMode = IsMobilePlatform ? QualitySetting.Low : QualitySetting.High;
+		public bool useMotionBlur = !IsMobilePlatform;
 		public bool useScreenShake = true;
-		public bool useVolumetricLighting = true;
+		public bool useVolumetricLighting = !IsMobilePlatform;
 		public int screenShake = 100;
-		public QualitySetting softShadowQuality = QualitySetting.Medium;
-		public QualitySetting postProcessingQuality = QualitySetting.Medium;
-		public QualitySetting reflectionQuality = QualitySetting.High;
+		public QualitySetting softShadowQuality = IsMobilePlatform ? QualitySetting.Low : QualitySetting.Medium;
+		public QualitySetting postProcessingQuality = IsMobilePlatform ? QualitySetting.Disabled : QualitySetting.Medium;
+		public QualitySetting reflectionQuality = IsMobilePlatform ? QualitySetting.Low : QualitySetting.High;
 
 		// Audio
 		public bool isMasterMuted;
@@ -603,12 +614,28 @@ public partial class SaveManager : Node
 
 		string configFile = DataDirectory.PathJoin(ConfigFileName);
 		FileAccess file = FileAccess.Open(configFile, FileAccess.ModeFlags.Write);
+		if (file == null)
+		{
+			GD.PushError($"Could not save configuration: {FileAccess.GetOpenError()}");
+			return;
+		}
 		file.StoreString(Json.Stringify(Config.ToDictionary(), "\t"));
 		file.Close();
 
-		file = FileAccess.Open(SaveLocationFile, FileAccess.ModeFlags.Write);
+		SaveDataDirectoryLocation();
+	}
+
+	private static void SaveDataDirectoryLocation()
+	{
+		if (IsMobilePlatform)
+			return;
+
+		using FileAccess file = FileAccess.Open(SaveLocationFile, FileAccess.ModeFlags.Write);
+		// Saving portable-directory metadata must not fail an otherwise successful game save.
+		if (file == null)
+			return;
+
 		file.StoreString(DataDirectory);
-		file.Close();
 	}
 
 	private static void InitializeSaveDirectory()
@@ -641,10 +668,10 @@ public partial class SaveManager : Node
 				: DisplayServer.WindowMode.Fullscreen;
 		}
 
-		if (DisplayServer.WindowGetMode() != targetMode)
+		if (!IsMobilePlatform && DisplayServer.WindowGetMode() != targetMode)
 			DisplayServer.WindowSetMode(targetMode);
 
-		if (!Config.useFullscreen)
+		if (!IsMobilePlatform && !Config.useFullscreen)
 		{
 			switch (Config.aspectRatio)
 			{
@@ -665,7 +692,21 @@ public partial class SaveManager : Node
 
 		Vector2I resolution = Instance.GetTree().Root.Size;
 		float ratio = resolution.X / (float)resolution.Y;
-		Instance.GetTree().Root.ContentScaleSize = new Vector2I(Mathf.RoundToInt(1920 / ratio), 1080);
+		if (IsMobilePlatform)
+		{
+			// Expand the logical canvas to the device aspect ratio without stretching or
+			// letterboxing. Menus fit their authored canvas independently of the 3D view.
+			Instance.GetTree().Root.ContentScaleSize = Runtime.ScreenSize;
+			Instance.GetTree().Root.ContentScaleAspect = Window.ContentScaleAspectEnum.Expand;
+			Config.useFullscreen = true;
+			Config.useExclusiveFullscreen = false;
+			Config.resizeMode = RenderingServer.ViewportScaling3DMode.Bilinear;
+			Config.postProcessingQuality = QualitySetting.Disabled;
+		}
+		else
+		{
+			Instance.GetTree().Root.ContentScaleSize = new Vector2I(Mathf.RoundToInt(1920 / ratio), 1080);
+		}
 
 		Engine.MaxFps = FrameRates[Config.framerate];
 		DisplayServer.VSyncMode targetVSyncMode =
@@ -673,8 +714,8 @@ public partial class SaveManager : Node
 		if (DisplayServer.WindowGetVsyncMode() != targetVSyncMode)
 			DisplayServer.WindowSetVsyncMode(targetVSyncMode);
 
-		Config.targetDisplay = Mathf.Clamp(Config.targetDisplay, 0, DisplayServer.GetScreenCount());
-		if (Config.targetDisplay != DisplayServer.WindowGetCurrentScreen())
+		Config.targetDisplay = Mathf.Clamp(Config.targetDisplay, 0, Mathf.Max(0, DisplayServer.GetScreenCount() - 1));
+		if (!IsMobilePlatform && Config.targetDisplay != DisplayServer.WindowGetCurrentScreen())
 			DisplayServer.WindowSetCurrentScreen(Config.targetDisplay);
 
 		// Quality settings
@@ -682,7 +723,7 @@ public partial class SaveManager : Node
 
 		// Update rendering mode/scale
 		RenderingServer.ViewportSetScaling3DScale(viewportRid, Config.renderScale * .01f);
-		Instance.GetTree().Root.ContentScaleMode = Config.renderScale >= 100 ? Window.ContentScaleModeEnum.CanvasItems : Window.ContentScaleModeEnum.Viewport;
+		Instance.GetTree().Root.ContentScaleMode = IsMobilePlatform || Config.renderScale >= 100 ? Window.ContentScaleModeEnum.CanvasItems : Window.ContentScaleModeEnum.Viewport;
 		RenderingServer.ViewportSetScaling3DMode(viewportRid, Config.resizeMode);
 
 		// Update anti-aliasing
@@ -1027,7 +1068,10 @@ public partial class SaveManager : Node
 		if (!FileAccess.FileExists(saveFile))
 			return;
 
-		OS.MoveToTrash(ProjectSettings.GlobalizePath(saveFile));
+		if (OS.HasFeature("ios")) // iOS does not provide a desktop trash directory.
+			DirAccess.RemoveAbsolute(saveFile);
+		else
+			OS.MoveToTrash(ProjectSettings.GlobalizePath(saveFile));
 	}
 
 	/// <summary> Creates a json file with contents of BGMResource. </summary>
@@ -1626,12 +1670,15 @@ public partial class SaveManager : Node
 
 		string dataFile = SaveDirectory.PathJoin(SharedFileName);
 		FileAccess file = FileAccess.Open(dataFile, FileAccess.ModeFlags.Write);
+		if (file == null)
+		{
+			GD.PushError($"Could not save shared data: {FileAccess.GetOpenError()}");
+			return;
+		}
 		file.StoreString(Json.Stringify(SharedData.ToDictionary(), "\t"));
 		file.Close();
 
-		file = FileAccess.Open(SaveLocationFile, FileAccess.ModeFlags.Write);
-		file.StoreString(DataDirectory);
-		file.Close();
+		SaveDataDirectoryLocation();
 	}
 	#endregion
 
@@ -1930,12 +1977,15 @@ public partial class SaveManager : Node
 
 		string dataFile = SaveDirectory.PathJoin(timeAttackFileName);
 		FileAccess file = FileAccess.Open(dataFile, FileAccess.ModeFlags.Write);
+		if (file == null)
+		{
+			GD.PushError($"Could not save time attack data: {FileAccess.GetOpenError()}");
+			return;
+		}
 		file.StoreString(Json.Stringify(TimeData.ToDictionary(), "\t"));
 		file.Close();
 
-		file = FileAccess.Open(SaveLocationFile, FileAccess.ModeFlags.Write);
-		file.StoreString(DataDirectory);
-		file.Close();
+		SaveDataDirectoryLocation();
 	}
 
 	#endregion

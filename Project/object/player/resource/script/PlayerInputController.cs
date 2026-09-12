@@ -1,5 +1,6 @@
 using Godot;
 using Project.Core;
+using Project.Interface.Touch;
 
 namespace Project.Gameplay;
 
@@ -136,7 +137,7 @@ public partial class PlayerInputController : Node
 	private readonly float MouseMotionDeadzone = 5f;
 	private void ProcessMouseMovement()
 	{
-		if (SaveManager.Config.mouseControlMode == SaveManager.MouseControlModeEnum.Disabled || Runtime.Instance.IsUsingController)
+		if (TouchControls.IsTouchActive || SaveManager.Config.mouseControlMode == SaveManager.MouseControlModeEnum.Disabled || Runtime.Instance.IsUsingController)
 		{
 			// Disable mouse inputs
 			mouseInput = Vector2.Zero;
@@ -208,7 +209,7 @@ public partial class PlayerInputController : Node
 	public bool GyroUseFullVertical { get; set; }
 	/// <summary> Offsets the gyro calibration. </summary>
 	public Vector3 GyroCalibrationOffset { get; set; }
-	public bool IsGyroEnabled => IsStrafeModeActive && SaveManager.Config.isGyroEnabled && Input.IsJoyMotionSensorsEnabled(Runtime.Instance.ActiveController);
+	public bool IsGyroEnabled => !TouchControls.IsTouchActive && IsStrafeModeActive && SaveManager.Config.isGyroEnabled && Input.IsJoyMotionSensorsEnabled(Runtime.Instance.ActiveController);
 
 	public Vector2 GyroInput { get; private set; }
 	private Vector2 gyroInputVelocity;

@@ -179,10 +179,12 @@ public partial class StageSettings : Node3D
 
 	public void UpdateQualitySettings()
 	{
-		bool postProcessingEnabled = SaveManager.Config.postProcessingQuality != SaveManager.QualitySetting.Disabled;
+		bool postProcessingEnabled = !SaveManager.IsMobilePlatform && SaveManager.Config.postProcessingQuality != SaveManager.QualitySetting.Disabled;
 		Environment.Environment.SsaoEnabled = postProcessingEnabled;
 		Environment.Environment.SsilEnabled = postProcessingEnabled;
 		Environment.Environment.GlowEnabled = SaveManager.Config.bloomMode != SaveManager.QualitySetting.Disabled;
+		if (SaveManager.IsMobilePlatform)
+			Environment.Environment.VolumetricFogEnabled = false;
 
 		switch (SaveManager.Config.softShadowQuality)
 		{

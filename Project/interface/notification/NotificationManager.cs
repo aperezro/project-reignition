@@ -10,6 +10,8 @@ namespace Project.Interface;
 public partial class NotificationManager : Control
 {
 	public static NotificationManager Instance { get; private set; }
+	/// <summary>Rewards own menu input until their closing transition hides the screen.</summary>
+	public bool IsActive { get; private set; }
 	private NotificationData CurrentNotification => NotificationList[0];
 
 	private readonly List<NotificationData> NotificationList = [];
@@ -88,6 +90,7 @@ public partial class NotificationManager : Control
 			return;
 		}
 
+		IsActive = true;
 		animator.Play("RESET");
 		animator.Advance(0.0);
 		ProcessMode = ProcessModeEnum.Inherit;
@@ -133,6 +136,7 @@ public partial class NotificationManager : Control
 
 	private void HideMenu()
 	{
+		IsActive = false;
 		animator.Play("RESET");
 		animator.Advance(0);
 		ProcessMode = ProcessModeEnum.Disabled;

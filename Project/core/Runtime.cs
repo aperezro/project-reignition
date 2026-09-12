@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using Project.Gameplay;
+using Project.Interface.Touch;
 
 namespace Project.Core;
 
@@ -41,9 +42,9 @@ public partial class Runtime : Node
 		SetDeferred(nameof(MouseMotionAmount), Vector2.Zero);
 		SetDeferred(nameof(MouseScrollInput), 0);
 
-		if (IsInstanceValid(StageSettings.Player) && !StageSettings.Player.Camera.IsFreeCamActive)
+		if (!SaveManager.IsMobilePlatform && IsInstanceValid(StageSettings.Player) && !StageSettings.Player.Camera.IsFreeCamActive)
 		{
-			if (SaveManager.Config.mouseControlMode == SaveManager.MouseControlModeEnum.Relative &&
+			if (!TouchControls.IsTouchActive && SaveManager.Config.mouseControlMode == SaveManager.MouseControlModeEnum.Relative &&
 				IsInstanceValid(StageSettings.Player) && !GetTree().Paused && StageSettings.Player.ProcessMode != ProcessModeEnum.Disabled)
 			{
 				Input.MouseMode = Input.MouseModeEnum.Captured;

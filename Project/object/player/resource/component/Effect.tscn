@@ -1955,9 +1955,9 @@ material = ExtResource("9_on86l")
 
 [node name="SpinMesh" type="MeshInstance3D" parent="VFX/ActionFX" unique_id=1442671857]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
 layers = 32
 material_override = ExtResource("11_lk1sb")
-transparency = 1.0
 cast_shadow = 0
 lod_bias = 128.0
 mesh = SubResource("SphereMesh_0nuab")

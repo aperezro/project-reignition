@@ -529,7 +529,11 @@ public partial class PlayerCameraController : Node3D
 
 		if (IsFreeCamActive)
 			fov = freeCamFov;
-		Camera.Fov = fov; // Update fov
+		// Keep the authored horizontal view on taller iPad screens; wide phones
+		// retain the vertical view and reveal more space on either side.
+		Camera.Fov = SaveManager.IsMobilePlatform
+			? Project.Interface.MobileScreenLayout.ExpandVerticalFov(fov, Camera.GetViewport().GetVisibleRect().Size)
+			: fov;
 	}
 
 	/// <summary> Calculates the additional pitch angle needed to look at the center of the player and a lockon target. </summary>
@@ -1191,6 +1195,9 @@ public partial class PlayerCameraController : Node3D
 
 	private void UpdateFreeCamState()
 	{
+		if (SaveManager.IsMobilePlatform || Project.Interface.Touch.TouchControls.IsTouchActive)
+			return;
+
 		bool wasFreeCamActive = IsFreeCamActive;
 
 		if (Input.IsActionJustPressed("debug_free_cam_reset"))

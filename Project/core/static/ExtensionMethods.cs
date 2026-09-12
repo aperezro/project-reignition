@@ -48,10 +48,9 @@ namespace Project
 		}
 
 		/// <summary> Returns a string containing all enum values. For Inspector. </summary>
-		public static string EnumToString<T>(this T e)
+		public static string EnumToString<T>(this T e) where T : struct, System.Enum
 		{
-			System.Type t = e.GetType();
-			string[] names = System.Enum.GetNames(t);
+			string[] names = System.Enum.GetNames<T>();
 			string output = "";
 
 			for (int i = 0; i < names.Length; i++)

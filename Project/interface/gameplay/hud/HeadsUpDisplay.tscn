@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://chn7ckbhlrr2g"]
 
+[ext_resource type="Script" path="res://interface/menu/MobileSafeAreaAnchors.cs" id="100_mobile_safe"]
 [ext_resource type="Script" uid="uid://bp3jrebic5b1y" path="res://interface/gameplay/hud/script/HeadsUpDisplay.cs" id="1_x1dw0"]
 [ext_resource type="PackedScene" uid="uid://b005oiw1u2ygf" path="res://interface/gameplay/hud/Objectives.tscn" id="4_k3w3o"]
 [ext_resource type="Texture2D" uid="uid://b6eevqhlu5ymx" path="res://interface/menu/level select/texture/fire soul.png" id="6_kp8ou"]
@@ -910,3 +911,6 @@ autoplay = &"init"
 libraries/ = SubResource("AnimationLibrary_aj5lk")
 
 [connection signal="RingChainFinished" from="Rings" to="Bonuses" method="FinishRingChain"]
+
+[node name="MobileSafeAreaAnchors" type="Node" parent="."]
+script = ExtResource("100_mobile_safe")
